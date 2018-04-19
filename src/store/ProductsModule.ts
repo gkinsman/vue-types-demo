@@ -18,9 +18,9 @@ function setProducts(state: ProductsState, newProducts: Product[]) {
     state.all = newProducts;
 }
 
-function decrementProductInventory(state: ProductsState, id: number) {
-    const product = state.all.find(p => p.id === id);
-    product!.inventory--;
+function decrementProductInventory(state: ProductsState, product: Product) {
+    const foundProduct = state.all.find(p => p.id === product.id);
+    foundProduct!.inventory--;
 }
 
 async function getAllProducts(context: BareActionContext<ProductsState, RootState>) {

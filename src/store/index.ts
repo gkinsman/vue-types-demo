@@ -1,10 +1,13 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 import { getStoreBuilder } from 'vuex-typex';
-import { CartState } from './CartModule';
+
+// Each module must be explicitly imported here
+// so that they are built before the store is built.
 import './CartModule';
-import { ProductsState } from './ProductsModule';
 import './ProductsModule';
+import { ProductsState } from './ProductsModule';
+import { CartState } from './CartModule';
 
 Vue.use(Vuex);
 

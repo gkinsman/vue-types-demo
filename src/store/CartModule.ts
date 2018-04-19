@@ -1,6 +1,7 @@
 import {buyProducts, Product} from '@/api/shop';
 import {BareActionContext, getStoreBuilder} from 'vuex-typex';
 import {RootState} from './index';
+import {products} from '@/store/ProductsModule';
 
 export interface CartItem {
     product: Product;
@@ -31,14 +32,12 @@ const cartTotalPriceGetter = builder.read(function cartTotalPrice(state: CartSta
     }, 0);
 });
 
-function addProductToCart(state: CartState, product: Product) {
-    const existingItem = state.added.find(p => p.product.id === product.id);
-    if (existingItem) { existingItem.quantity++; }
-    else { state.added.push({product, quantity: 1}); }
+function pushProductToCart(state: CartState, product: Product) {
+    state.added.push({product, quantity: 1});
 }
 
-function incrementItemQuantity(state: CartState, id: number) {
-    const item = state.added.find(p => p.product.id === id);
+function incrementItemQuantity(state: CartState, product: Product) {
+    const item = state.added.find(p => p.product.id === product.id);
     item!.quantity++;
 }
 
@@ -63,7 +62,27 @@ async function checkout(context: BareActionContext<CartState, RootState>) {
     }
 }
 
+async function addProductToCart(context: BareActionContext<CartState, RootState>, product: Product) {
+    cart.setCheckoutStatus(null);
+    if (product.inventory > 0) {
+        const cartItem = cart.state.added.find(item => item.product.id === product.id);
+        if (!cartItem) {
+            cart.pushProductToCart(product);
+        } else {
+            cart.incrementItemQuantity(product);
+        }
+
+        products.decrementProductInventory(product);
+    }
+}
+
+const stateGetter = builder.state();
+
 export const cart = {
+    get state() {
+        return stateGetter();
+    },
+
     get checkoutStatus() {
         return checkoutStatusGetter();
     },
@@ -74,10 +93,11 @@ export const cart = {
         return cartTotalPriceGetter();
     },
 
-    addProductToCart: builder.commit(addProductToCart),
-    incrementItemQuanitity: builder.commit(incrementItemQuantity),
+    pushProductToCart: builder.commit(pushProductToCart),
+    incrementItemQuantity: builder.commit(incrementItemQuantity),
     setCartItems: builder.commit(setCartItems),
     setCheckoutStatus: builder.commit(setCheckoutStatus),
 
     checkout: builder.dispatch(checkout),
+    addProductToCart: builder.dispatch(addProductToCart),
 };

@@ -20,7 +20,9 @@ const initialState: CartState = {
 const builder = getStoreBuilder<RootState>().module("cart", initialState)
 
 const checkoutStatusGetter = builder.read(function checkoutStatus(state: CartState) { return state.checkoutStatus })
-const cartProductsGetter = builder.read(function cartProducts(state: CartState) { return state.added })
+const cartProductsGetter = builder.read(function cartProducts(state: CartState) {
+    return state.added
+})
 const cartTotalPriceGetter = builder.read(function cartTotalPrice(state: CartState) {
     return cart.cartProducts.reduce((total, cartItem) => {
         return total + cartItem.product.price * cartItem.quantity

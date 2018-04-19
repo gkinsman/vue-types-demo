@@ -1,7 +1,6 @@
 import { Product, Shop } from '@/api/shop'
 import { getStoreBuilder, BareActionContext } from 'vuex-typex';
 import { RootState } from '@/store';
-import { ActionContext } from 'vuex';
 
 export interface ProductsState {
     all: Product[]
@@ -15,9 +14,8 @@ const builder = getStoreBuilder<RootState>().module("products", initialState)
 
 const allProductsGetter = builder.read(function allProducts(state: ProductsState) { return state.all })
 
-
-function setProducts(state: ProductsState, products: Product[]) {
-    state.all = products
+function setProducts(state: ProductsState, newProducts: Product[]) {
+    state.all = newProducts
 }
 
 function decrementProductInventory(state: ProductsState, id: number) {

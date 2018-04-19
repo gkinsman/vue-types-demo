@@ -11,25 +11,25 @@
 </template>
 
 <script lang="ts">
-    import {products} from "@/store/ProductsModule";
-    import {cart} from "@/store/CartModule";
-    import {Product} from "@/api/shop";
-    import Vue from "vue";
-    import {Component, Lifecycle} from "av-ts";
+import { products } from '@/store/ProductsModule';
+import { cart } from '@/store/CartModule';
+import { Product } from '@/api/shop';
+import Vue from 'vue';
+import { Component, Lifecycle } from 'av-ts';
 
-    @Component
-    export default class ProductList extends Vue {
-        get products() {
-            return products.allProducts;
-        }
+@Component
+export default class ProductList extends Vue {
+  get products() {
+    return products.allProducts;
+  }
 
-        addProductToCart(product: Product) {
-            cart.addProductToCart(product);
-        }
+  addProductToCart(product: Product) {
+    cart.addProductToCart(product);
+  }
 
-        @Lifecycle
-        async created() {
-            await products.getAllProducts();
-        }
-    }
+  @Lifecycle
+  async created() {
+    await products.getAllProducts();
+  }
+}
 </script>

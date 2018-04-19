@@ -1,16 +1,16 @@
+import Vue from 'vue';
+import Vuex from 'vuex';
 import { getStoreBuilder } from 'vuex-typex';
 import { CartState } from './CartModule';
+import './CartModule';
 import { ProductsState } from './ProductsModule';
-import Vuex from 'vuex';
-import Vue from 'vue';
-import './CartModule'
-import './ProductsModule'
+import './ProductsModule';
 
-Vue.use(Vuex)
+Vue.use(Vuex);
 
 export interface RootState {
-    cart: CartState,
-    products: ProductsState
+    cart: CartState;
+    products: ProductsState;
 }
 
 const store = getStoreBuilder<RootState>().vuexStore();

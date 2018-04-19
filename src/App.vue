@@ -10,17 +10,16 @@
 </template>
 
 <script lang="ts">
-    import Vue from 'vue'
-    import ProductList from "./components/ProductList.vue";
-    import ShoppingCart from "./components/ShoppingCart.vue";
-    import {Component} from "av-ts";
+import Vue from 'vue';
+import ProductList from './components/ProductList.vue';
+import ShoppingCart from './components/ShoppingCart.vue';
+import { Component } from 'av-ts';
 
-    @Component({
-        components: {
-            ProductList, ShoppingCart
-        }
-    })
-    export default class App extends Vue {
-
-    }
+@Component({
+  components: {
+    ProductList,
+    ShoppingCart,
+  },
+})
+export default class App extends Vue {}
 </script>

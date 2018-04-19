@@ -6,8 +6,11 @@
   "rules": {
     "quotemark": [true, "single"],
     "indent": [true, "spaces", 2],
+    "arrow-parens": false,
+    "one-line": [false, "check-catch","check-finally","check-open-brace", "check-whitespace"],
     "interface-name": false,
-    "ordered-imports": true,
+    "member-access": [true, "no-public"],
+    "ordered-imports": false,
     "object-literal-sort-keys": false,
     "no-consecutive-blank-lines": false
   }

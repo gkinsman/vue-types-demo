@@ -18,27 +18,26 @@
 </template>
 
 <script lang="ts">
-    import {cart} from "@/store/CartModule";
-    import Vue from "vue";
-    import {Component} from "av-ts";
+import { cart } from '@/store/CartModule';
+import Vue from 'vue';
+import { Component } from 'av-ts';
 
-    @Component
-    export default class ShoppingCart extends Vue {
+@Component
+export default class ShoppingCart extends Vue {
+  get cartProducts() {
+    return cart.cartProducts;
+  }
 
-        get cartProducts() {
-            return cart.cartProducts;
-        }
+  get checkoutStatus() {
+    return cart.checkoutStatus;
+  }
 
-        get checkoutStatus() {
-            return cart.checkoutStatus;
-        }
+  get total() {
+    return cart.cartTotalPrice;
+  }
 
-        get total() {
-            return cart.cartTotalPrice;
-        }
-
-        async checkout() {
-            await cart.checkout();
-        }
-    }
+  async checkout() {
+    await cart.checkout();
+  }
+}
 </script>

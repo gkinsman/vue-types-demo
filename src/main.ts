@@ -1,13 +1,13 @@
-import Vue from 'vue';
+import {currency} from '@/filters/currency';
 import store from '@/store';
-import { currency } from '@/filters/currency';
-import App from "./App.vue"
+import Vue from 'vue';
+import App from './App.vue';
 
 Vue.config.productionTip = false;
 
-Vue.filter("currency", currency)
+Vue.filter('currency', currency);
 
 new Vue({
-  store,
-  render: (h) => h(App),
+    store,
+    render: (h) => h(App),
 }).$mount('#app');

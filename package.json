@@ -22,9 +22,8 @@
     "sass-loader": "^6.0.6",
     "vue-template-compiler": "^2.5.13"
   },
-  "browserslist": [
-    "> 1%",
-    "last 2 versions",
-    "not ie <= 8"
-  ]
+  "prettier": {
+    "singleQuote": true
+  },
+  "browserslist": ["> 1%", "last 2 versions", "not ie <= 8"]
 }
